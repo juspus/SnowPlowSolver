@@ -14,7 +14,7 @@ namespace SnowPlowSolver
             _GeneticAlgorithm = geneticAlgorithm;
         }
 
-        public IIndividual CreateIndividual(IEnumerable<ILine> Path)
+        public IIndividual CreateIndividual(IList<ILine> Path)
         {
             var individual = new Individual(_GeneticAlgorithm, Path);
             return individual;

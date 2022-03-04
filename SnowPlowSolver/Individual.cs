@@ -12,9 +12,9 @@ namespace SnowPlowSolver
         private readonly IGeneticAlgorithm _GeneticAlgorithm;
         public double Score { get; private set; }
 
-        public IEnumerable<ILine> Path { get; private set; }
+        public IList<ILine> Path { get; private set; }
 
-        public Individual(IGeneticAlgorithm geneticAlgorithm, IEnumerable<ILine> path)
+        public Individual(IGeneticAlgorithm geneticAlgorithm, IList<ILine> path)
         {
             _GeneticAlgorithm = geneticAlgorithm;
             Path = path.ToList();

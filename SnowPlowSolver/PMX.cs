@@ -20,70 +20,89 @@ namespace SnowPlowSolver
             CrossoverRate = crossRate;
         }
 
-        public IEnumerable<ILine> Perform(IEnumerable<ILine> mother, IEnumerable<ILine> father)
-        {
-            var elementsCount = mother.Count();
-            if (_randomizer.GeneratePercent() > CrossoverRate)
+        public IList<ILine> Perform(IList<ILine> mother, IList<ILine> father)
+        {            
+            if (!CrossoverIsPerformed())
             {
                 return mother;
             }
 
+            var elementsCount = mother.Count();
             //Sukuriamas vaiko masyvas
             ILine[] offspring = new ILine[elementsCount];
+            //Gaunamos pradžios ir pabaigos aleles
+            var Allele = new Allele(_randomizer, elementsCount);
 
-            //Pradinė ir galinė kopijuojamo genų ruožo alelės
-            var startAllele =  _randomizer.GenerateBetween(0, elementsCount);
-            var stopAllele = _randomizer.GenerateBetween(startAllele, elementsCount);
-
-            //Sukuriamas nesutampančių genų žodynas
-            Dictionary<int, ILine> swathDiff = new Dictionary<int, ILine>();
-
-            for (int i = startAllele; i < stopAllele; i++)
-            {
-                offspring[i] = mother.ElementAt(i);
-                swathDiff.Add(i, father.ElementAt(i));
-            }
-
-            for (int i = startAllele; i < stopAllele; i++)
-            {
-                swathDiff = swathDiff.Where(x => x.Value.Id != offspring[i].Id).ToDictionary(x => x.Key, x => x.Value);
-            }
-
-            int tryNum = 0;
-
-            if (swathDiff.Any())
-            {
-                tryNum = swathDiff.First().Key;
-            }
-
-            while (0 < swathDiff.Count)
-            {
-                int idx = Array.FindIndex<ILine>(mother.ToArray(), x => x.Id == father.ElementAt(tryNum).Id);
-
-                if (idx < startAllele || idx >= stopAllele)
-                {
-                    offspring[idx] = swathDiff.First().Value;
-                    swathDiff.Remove(swathDiff.First().Key);
-                    if (swathDiff.Count > 0)
-                    {
-                        tryNum = swathDiff.First().Key;
-                    }
-                }
-                else
-                {
-                    tryNum = idx;
-                }
-            }
-
-            for (var i = 0; i < offspring.Count(); i++)
-            {
-                if (i == 0)
-                {
-                    offspring[i] = mother.ElementAt(i);
-                }
-            }
-
+            CopySwath(Allele, offspring, mother);
+            FillSwathDifference(Allele, offspring, mother, father);
+            FillMissing(offspring, father);
             return offspring;
+        }
+
+        public int FindElementInAnotherParent(IList<ILine> mama, IList<ILine> papa, int idx)
+        {
+            var el = papa[idx];
+            var index = mama.IndexOf(el);
+            return index;
+        }
+
+        private bool CrossoverIsPerformed()
+        {
+            return _randomizer.GeneratePercent() < CrossoverRate;
+        }
+
+        private IList<ILine> CopySwath(Allele allele, ILine[] offspring, IList<ILine> mama)
+        {            
+            for(var i = allele.Start; i< allele.Stop; i++)
+            {
+                offspring[i] = mama[i];
+            }
+            return offspring;
+        }
+
+        private void FillSwathDifference(Allele allele, ILine[] offspring, IList<ILine> mama, IList<ILine> papa)
+        {
+            for (var i = allele.Start; i < allele.Stop; i++)
+            {
+                if(!offspring.Where(x=>papa[i].Equals(x)).Any())
+                {
+                    offspring[FindPlaceToCopy(offspring, mama, papa, i)] = papa[i];
+                }
+            }
+        }
+
+        private void FillMissing(ILine[] offspring, IList<ILine> papa)
+        {
+            for (var i = 0; i < offspring.Length; i++)
+            {
+                if(offspring[i] == null)
+                {
+                    offspring[i] = papa[i];
+                }
+            }
+        }
+
+        private int FindPlaceToCopy(IList<ILine> offspring, IList<ILine> mama, IList<ILine> papa, int id)
+        {
+            var newEle = papa[FindElementInAnotherParent(papa, mama, id)];
+            var newIdx = papa.IndexOf(newEle);
+            if (offspring.Where(x => mama[newIdx].Equals(x)).Any())
+            {
+                return FindPlaceToCopy(offspring, mama, papa, newIdx);
+            }
+            return newIdx;
+        }
+    }
+
+    internal class Allele
+    {
+        public int Start { get; }
+        public int Stop { get; }
+        public Allele(IRandomizer randomizer, int elementsCount)
+        {
+            //Pradinė ir galinė kopijuojamo genų ruožo alelės
+            Start = randomizer.GenerateBetween(0, elementsCount);
+            Stop = randomizer.GenerateBetween(Start, elementsCount);
         }
     }
 }

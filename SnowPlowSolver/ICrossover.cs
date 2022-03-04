@@ -8,6 +8,6 @@ namespace SnowPlowSolver
 {
     internal interface ICrossover
     {
-        IEnumerable<ILine> Perform(IEnumerable<ILine> mother, IEnumerable<ILine> father);
+        IList<ILine> Perform(IList<ILine> mother, IList<ILine> father);
     }
 }

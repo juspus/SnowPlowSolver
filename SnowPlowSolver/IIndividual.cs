@@ -9,7 +9,7 @@ namespace SnowPlowSolver
     internal interface IIndividual
     {
         double Score { get; }
-        IEnumerable<ILine> Path { get; }
+        IList<ILine> Path { get; }
         double CalculateScore();
         void Mutate();
         IIndividual Cross(IIndividual partner);

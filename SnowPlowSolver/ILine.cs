@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace SnowPlowSolver
 {
-    public interface ILine:IEquatable<ILine>
+    /// <summary>
+    /// Implementation must be Struct
+    /// </summary>
+    public interface ILine: IEquatable<ILine>
     {
         IPoint StartPoint { get; }
         IPoint EndPoint { get; }

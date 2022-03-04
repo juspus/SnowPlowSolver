@@ -8,6 +8,6 @@ namespace SnowPlowSolver
 {
     internal interface IMutation
     {
-        IEnumerable<ILine> Mutate(IEnumerable<ILine> lines);
+        IList<ILine> Mutate(IList<ILine> lines);
     }
 }
