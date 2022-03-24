@@ -1,7 +1,8 @@
 using Xunit;
 using Moq;
-using SnowPlowSolver;
 using FluentAssertions;
+using SnowPlowSolver.Interfaces;
+using SnowPlowSolver.Default;
 
 namespace UnitTests
 {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Interfaces
 {
-    internal interface ICrossover
+    public interface ICrossover
     {
         IList<ILine> Perform(IList<ILine> mother, IList<ILine> father);
     }

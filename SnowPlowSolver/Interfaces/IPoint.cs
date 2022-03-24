@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Interfaces
 {
-    internal interface IMutation
+    public interface IPoint
     {
-        IList<ILine> Mutate(IList<ILine> lines);
+        double X { get; }
+        double Y { get; }
     }
 }

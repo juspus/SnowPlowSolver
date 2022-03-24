@@ -1,4 +1,4 @@
-﻿namespace SnowPlowSolver
+﻿namespace SnowPlowSolver.Interfaces
 {
     public interface IRandomizer
     {

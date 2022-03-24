@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Interfaces
 {
-    internal interface IIndividual
+    public interface IIndividual
     {
         double Score { get; }
         IList<ILine> Path { get; }

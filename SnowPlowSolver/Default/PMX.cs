@@ -1,12 +1,13 @@
-﻿using System;
+﻿using SnowPlowSolver.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Default
 {
-    public class PMX : ICrossover
+    internal class PMX : ICrossover
     {
         private readonly IRandomizer _randomizer;
         private double CrossoverRate;
@@ -21,7 +22,7 @@ namespace SnowPlowSolver
         }
 
         public IList<ILine> Perform(IList<ILine> mother, IList<ILine> father)
-        {            
+        {
             if (!CrossoverIsPerformed())
             {
                 return mother;
@@ -52,8 +53,8 @@ namespace SnowPlowSolver
         }
 
         private IList<ILine> CopySwath(Allele allele, ILine[] offspring, IList<ILine> mama)
-        {            
-            for(var i = allele.Start; i< allele.Stop; i++)
+        {
+            for (var i = allele.Start; i < allele.Stop; i++)
             {
                 offspring[i] = mama[i];
             }
@@ -64,7 +65,7 @@ namespace SnowPlowSolver
         {
             for (var i = allele.Start; i < allele.Stop; i++)
             {
-                if(!offspring.Where(x=>papa[i].Equals(x)).Any())
+                if (!offspring.Where(x => papa[i].Equals(x)).Any())
                 {
                     offspring[FindPlaceToCopy(offspring, mama, papa, i)] = papa[i];
                 }
@@ -75,7 +76,7 @@ namespace SnowPlowSolver
         {
             for (var i = 0; i < offspring.Length; i++)
             {
-                if(offspring[i] == null)
+                if (offspring[i] == null)
                 {
                     offspring[i] = papa[i];
                 }

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using SnowPlowSolver.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Default
 {
-    public class Randomizer : IRandomizer
+    internal class Randomizer : IRandomizer
     {
         Random rng = new Random();
         public double GeneratePercent()

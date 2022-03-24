@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SnowPlowSolver.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Default
 {
     internal struct Individual : IIndividual
     {
@@ -31,7 +32,7 @@ namespace SnowPlowSolver
         }
         public IIndividual Cross(IIndividual partner)
         {
-            return new Individual(_GeneticAlgorithm, _GeneticAlgorithm.Crossover.Perform(this.Path, partner.Path));
+            return new Individual(_GeneticAlgorithm, _GeneticAlgorithm.Crossover.Perform(Path, partner.Path));
         }
     }
 }

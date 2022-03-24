@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Interfaces
 {
-    internal interface IGeneticAlgorithm
+    internal interface IGeneticAlgorithm : IOptimizationAlgorithm
     {
         IFitnessFunction FitnessFunction { get; }
         IMutation Mutation { get; }
         ICrossover Crossover { get; }
-        void SetParameters(int epochs, int populationSize);
-        void Evolution();
     }
 }

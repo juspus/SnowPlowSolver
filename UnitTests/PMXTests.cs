@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Moq;
-using SnowPlowSolver;
 using FluentAssertions;
 using System.Numerics;
+using SnowPlowSolver.Interfaces;
+using SnowPlowSolver.Default;
 
 namespace UnitTests
 {

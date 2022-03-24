@@ -5,12 +5,12 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Interfaces
 {
     /// <summary>
     /// Implementation must be Struct
     /// </summary>
-    public interface ILine: IEquatable<ILine>
+    public interface ILine : IEquatable<ILine>
     {
         IPoint StartPoint { get; }
         IPoint EndPoint { get; }

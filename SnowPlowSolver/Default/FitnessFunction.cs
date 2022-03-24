@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Numerics;
 using System.Threading.Tasks;
+using SnowPlowSolver.Interfaces;
 
-namespace SnowPlowSolver
+namespace SnowPlowSolver.Default
 {
-    public class FitnessFunction : IFitnessFunction
+    internal class FitnessFunction : IFitnessFunction
     {
         private const double ANGLE_CHANGE_PENALTY = 300;
         public double CalculateScore(IEnumerable<ILine> path)
