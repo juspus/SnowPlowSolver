@@ -18,7 +18,7 @@ namespace SnowPlowSolver.Default
         public IIndividual SelectParent(IEnumerable<IIndividual> population)
         {
             var fullfitness = CalculateFitnessSum(population);
-            var randomFitness = randomizer.GenerateBetween(0, fullfitness);
+            var randomFitness = randomizer.GenerateBetween(fullfitness, 0);
             var selectedIndividual = population.Last();
 
             double sumOfFitness = 0;

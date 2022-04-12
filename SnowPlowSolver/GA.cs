@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace SnowPlowSolver
 {
@@ -22,7 +23,7 @@ namespace SnowPlowSolver
         private IRandomizer Randomizer;
         private ISurvivorSelection SurvivorSelection;
 
-        public GA(int epochs, int populationSize,
+        public GA(int epochs, int populationSize, double mutationPercent,
             IFitnessFunction fitnessFunction = null,
             IMutation mutation = null,
             ICrossover crossover = null,
@@ -31,6 +32,7 @@ namespace SnowPlowSolver
         {
             _Epochs = epochs;
             _PopulationSize = populationSize;
+            _MutationPercent = mutationPercent;
             Randomizer = new Randomizer();
             if (fitnessFunction == null)
                 fitnessFunction = new FitnessFunction();
@@ -52,14 +54,25 @@ namespace SnowPlowSolver
 
         private void Evolution()
         {
-            var offsprings = new List<IIndividual>();
-            _Population = _Population.OrderBy(x => x.Score).ToList();
+            var offsprings = new ConcurrentBag<IIndividual>();
+            _Population = _Population.OrderByDescending(x => x.Score).ToList();
+            //for(var j = 0; j < _Population.Count; j++)
+            //{
+            //    var papa = Selection.SelectParent(_Population);
+            //    var mama = Selection.SelectParent(_Population);
+            //    var offspring = mama.Cross(papa);
+            //    if (Randomizer.GeneratePercent() < _MutationPercent)
+            //    {
+            //        offspring.Mutate();
+            //    }
+            //    offsprings.Add(offspring);
+            //}
             Parallel.For(0, _PopulationSize, (j) =>
             {
                 var papa = Selection.SelectParent(_Population);
                 var mama = Selection.SelectParent(_Population);
                 var offspring = mama.Cross(papa);
-                if(Randomizer.GeneratePercent() < _MutationPercent)
+                if (Randomizer.GeneratePercent() < _MutationPercent)
                 {
                     offspring.Mutate();
                 }
@@ -76,11 +89,13 @@ namespace SnowPlowSolver
             for (var i = 0; i< _Epochs; i++)
             {
                 Evolution();
+                Console.WriteLine(_Population.First().Score);
             }
             return _Population.OrderBy(x => x.Score).First().Path;
         }
         private void Populate()
         {
+            _Population = new List<IIndividual>();
             for(var i = 0; i< _PopulationSize; i++)
             {
                 Shuffle(_Lines);

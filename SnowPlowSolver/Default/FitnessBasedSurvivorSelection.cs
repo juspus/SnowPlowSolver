@@ -16,9 +16,9 @@ namespace SnowPlowSolver.Default
         }
         public IEnumerable<IIndividual> GetSurvivors(IEnumerable<IIndividual> firstGen, IEnumerable<IIndividual> secondGen)
         {
-            firstGen = firstGen.OrderBy(x => x.Score);
+            firstGen = firstGen.OrderByDescending(x => x.Score);
             List<IIndividual> nextGen = firstGen.Take(eliteAmount).ToList();
-            secondGen = secondGen.OrderBy(x => x.Score);
+            secondGen = secondGen.OrderByDescending(x => x.Score);
             nextGen.AddRange(secondGen.Take(secondGen.Count() - eliteAmount).ToList());
             return nextGen;
         }
