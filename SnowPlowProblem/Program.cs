@@ -25,24 +25,31 @@ var lines = con.QueryAsync<Line, Point, Point, Line>(linesSql, ((line, stPoint, 
  })).Result;
 //var lines2 = d.Lines.ToList();
 var dxfD = new netDxf.DxfDocument();
+dxfD.Layers.Add(new netDxf.Tables.Layer("Real"));
 for (var i = 1; i < lines.Count(); i++)
 {
     var s = lines.ElementAt(i-1).EndPoint.ConvertToVector();
     var e = lines.ElementAt(i).StartPoint.ConvertToVector();
-    dxfD.AddEntity(new netDxf.Entities.Line(s, e));
+    var ee = lines.ElementAt(i).EndPoint.ConvertToVector();
+
+    dxfD.AddEntity(new netDxf.Entities.Line(e, ee) { Layer = dxfD.Layers["Real"] });
+    dxfD.AddEntity(new netDxf.Entities.Line(s, e) { Color = netDxf.AciColor.FromTrueColor(i*1000)});
 }
 dxfD.Save("raw.dxf");
 
 
-var ga = new SnowPlowSolver.GA(10000, 500, 0.2);
+var ga = new SnowPlowSolver.GA(1000, 500, 0.2);
 var opPath = ga.OptimizePath(lines);
 
 var dxfOp = new netDxf.DxfDocument();
+dxfOp.Layers.Add(new netDxf.Tables.Layer("Real"));
 for (var i = 1; i < lines.Count(); i++)
 {
     var s = opPath.ElementAt(i - 1).EndPoint.ConvertToVector();
     var e = opPath.ElementAt(i).StartPoint.ConvertToVector();
-    dxfOp.AddEntity(new netDxf.Entities.Line(s, e));
+    var ee = opPath.ElementAt(i).EndPoint.ConvertToVector();
+    dxfOp.AddEntity(new netDxf.Entities.Line(e, ee) { Layer = dxfOp.Layers["Real"] });
+    dxfOp.AddEntity(new netDxf.Entities.Line(s, e) { Color = netDxf.AciColor.FromTrueColor(i*1000) });
 }
 dxfOp.Save("op.dxf");
 

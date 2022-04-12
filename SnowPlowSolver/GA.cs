@@ -56,18 +56,7 @@ namespace SnowPlowSolver
         {
             var offsprings = new ConcurrentBag<IIndividual>();
             _Population = _Population.OrderByDescending(x => x.Score).ToList();
-            //for(var j = 0; j < _Population.Count; j++)
-            //{
-            //    var papa = Selection.SelectParent(_Population);
-            //    var mama = Selection.SelectParent(_Population);
-            //    var offspring = mama.Cross(papa);
-            //    if (Randomizer.GeneratePercent() < _MutationPercent)
-            //    {
-            //        offspring.Mutate();
-            //    }
-            //    offsprings.Add(offspring);
-            //}
-            Parallel.For(0, _PopulationSize, (j) =>
+            for (var j = 0; j < _Population.Count; j++)
             {
                 var papa = Selection.SelectParent(_Population);
                 var mama = Selection.SelectParent(_Population);
@@ -77,7 +66,18 @@ namespace SnowPlowSolver
                     offspring.Mutate();
                 }
                 offsprings.Add(offspring);
-            });
+            }
+            //Parallel.For(0, _PopulationSize, (j) =>
+            //{
+            //    var papa = Selection.SelectParent(_Population);
+            //    var mama = Selection.SelectParent(_Population);
+            //    var offspring = mama.Cross(papa);
+            //    if (Randomizer.GeneratePercent() < _MutationPercent)
+            //    {
+            //        offspring.Mutate();
+            //    }
+            //    offsprings.Add(offspring);
+            //});
             _Population = SurvivorSelection.GetSurvivors(_Population, offsprings).ToList();
             
         }
