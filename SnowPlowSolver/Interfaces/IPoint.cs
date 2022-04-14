@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SnowPlowSolver.Interfaces
 {
+    /// <summary>
+    /// Interface for point.
+    /// </summary>
     public interface IPoint
     {
         double X { get; }

@@ -23,6 +23,17 @@ namespace SnowPlowSolver
         private IRandomizer Randomizer;
         private ISurvivorSelection SurvivorSelection;
 
+        /// <summary>
+        /// Setup of Genetic Algorithm.
+        /// </summary>
+        /// <param name="epochs">Number of iterations for Genetics Algorithm.</param>
+        /// <param name="populationSize">Quantity of individuals in a genetic algorithm population.</param>
+        /// <param name="mutationPercent">Percent of mutation probability at each crossover.</param>
+        /// <param name="fitnessFunction">Function that evaluates the quality of single individual. If none provided, default is selected.</param>
+        /// <param name="mutation">Type of individual mutation. Default is Swap Mutation.</param>
+        /// <param name="crossover">Type of crossover between parents. Default is PMX.</param>
+        /// <param name="selection">Type of parent selection. Default is Wheel selection.</param>
+        /// <param name="survivorSelection">Type of survivor selection. Default is Fitness based Survivor Selection.</param>
         public GA(int epochs, int populationSize, double mutationPercent,
             IFitnessFunction fitnessFunction = null,
             IMutation mutation = null,
@@ -82,6 +93,11 @@ namespace SnowPlowSolver
             
         }
 
+        /// <summary>
+        /// Optimizes the path with a setup genetic algorithm.
+        /// </summary>
+        /// <param name="lines">Collection of lines for which to optimize path.</param>
+        /// <returns>Optimized path.</returns>
         public IEnumerable<ILine> OptimizePath(IEnumerable<ILine> lines)
         {
             _Lines = lines.ToList();
