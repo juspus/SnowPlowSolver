@@ -10,6 +10,9 @@
     <PackageProjectUrl>https://github.com/juspus/SnowPlowSolver</PackageProjectUrl>
     <RepositoryUrl>https://github.com/juspus/SnowPlowSolver</RepositoryUrl>
     <PackageTags>snowplow;ga;geneticalgorithm;study;optimization</PackageTags>
+    <PackageLicenseFile>C:\Users\justa\source\repos\SnowPlowSolver\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
