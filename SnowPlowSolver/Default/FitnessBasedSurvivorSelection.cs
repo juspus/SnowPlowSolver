@@ -9,11 +9,7 @@ namespace SnowPlowSolver.Default
 {
     internal class FitnessBasedSurvivorSelection : ISurvivorSelection
     {
-        private int eliteAmount = 5;
-        public void SetEliteNumber(int amount)
-        {
-            eliteAmount = amount;
-        }
+        private int eliteAmount = 5;        
         public IEnumerable<IIndividual> GetSurvivors(IEnumerable<IIndividual> firstGen, IEnumerable<IIndividual> secondGen)
         {
             firstGen = firstGen.OrderByDescending(x => x.Score);

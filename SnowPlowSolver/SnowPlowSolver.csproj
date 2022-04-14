@@ -4,6 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Package for solving snowplow problem using genetic algorithm.</Description>
+    <PackageProjectUrl>https://github.com/juspus/SnowPlowSolver</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/juspus/SnowPlowSolver</RepositoryUrl>
+    <PackageTags>snowplow;ga;geneticalgorithm;study;optimization</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
 	<InternalsVisibleTo Include="UnitTests" />
+	  <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
 </Project>
