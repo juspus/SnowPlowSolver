@@ -39,7 +39,6 @@ namespace SnowPlowProblem
                 CalculateDirection();
             }
         }
-        public bool Reversed { get; set; }
 
         [Key]
         public int Id { get; set; }
@@ -75,6 +74,7 @@ namespace SnowPlowProblem
             Direction = new Vector2((float)x, (float)y);
         }
 
+        public bool Reversed { get; set; }
 
         public void Reverse()
         {

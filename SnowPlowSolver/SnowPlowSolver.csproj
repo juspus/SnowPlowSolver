@@ -10,12 +10,16 @@
     <PackageProjectUrl>https://github.com/juspus/SnowPlowSolver</PackageProjectUrl>
     <RepositoryUrl>https://github.com/juspus/SnowPlowSolver</RepositoryUrl>
     <PackageTags>snowplow;ga;geneticalgorithm;study;optimization</PackageTags>
-    <PackageLicenseFile>C:\Users\justa\source\repos\SnowPlowSolver\LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="docfx.console" Version="2.59.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MathNet.Spatial" Version="0.6.0" />
   </ItemGroup>
   <ItemGroup>

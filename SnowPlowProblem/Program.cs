@@ -1,5 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using SnowPlowSolver;
 using SnowPlowProblem;
 using Dapper;
 using Microsoft.Data.Sqlite;
