@@ -21,11 +21,6 @@ namespace SnowPlowSolver.Default
             Path = path.ToList();
             Score = _GeneticAlgorithm.FitnessFunction.CalculateScore(Path);
         }
-        public double CalculateScore()
-        {
-            Score = _GeneticAlgorithm.FitnessFunction.CalculateScore(Path);
-            return Score;
-        }
         public void Mutate()
         {
             Path = _GeneticAlgorithm.Mutation.Mutate(Path);

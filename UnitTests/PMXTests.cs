@@ -83,35 +83,35 @@ namespace UnitTests
             };
         }
 
-        public class Line : ILine
-        {
-            public IPoint StartPoint { get => null; }
+        //public class Line : ILine
+        //{
+        //    public IPoint StartPoint { get => null; }
 
-            public IPoint EndPoint { get => null; }
+        //    public IPoint EndPoint { get => null; }
 
-            public bool Reversed { get => false; }
+        //    public bool Reversed { get => false; }
 
-            public int Id { get; }
+        //    public int Id { get; }
 
-            public Vector2 Direction { get => new Vector2(0,0); }
+        //    public Vector2 Direction { get => new Vector2(0,0); }
 
-            public bool Equals(ILine? other)
-            {
-                if(other == null)
-                {
-                    return false;
-                }
-                return Id == other.Id;
-            }
+        //    public bool Equals(ILine? other)
+        //    {
+        //        if(other == null)
+        //        {
+        //            return false;
+        //        }
+        //        return Id == other.Id;
+        //    }
 
-            public void Reverse()
-            {
-                throw new NotImplementedException();
-            }
-            public Line(int id)
-            {
-                Id = id;
-            }
-        }
+        //    public void Reverse()
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //    public Line(int id)
+        //    {
+        //        Id = id;
+        //    }
+        //}
     }
 }
